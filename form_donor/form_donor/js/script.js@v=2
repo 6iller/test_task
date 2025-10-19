@@ -1,0 +1,63 @@
+let timerShow_hh = document.getElementById("hh"); // Берём блок для показа hh
+let timerShow_mm = document.getElementById("mm"); // Берём блок для показа mm
+let timerShow_ss = document.getElementById("ss"); // Берём блок для показа ss
+let timerShow_hh2 = document.getElementById("hh2"); // Берём блок для показа hh
+let timerShow_mm2 = document.getElementById("mm2"); // Берём блок для показа mm
+let timerShow_ss2 = document.getElementById("ss2"); // Берём блок для показа ss
+let timerShow_hh3 = document.getElementById("hh3"); // Берём блок для показа hh
+let timerShow_mm3 = document.getElementById("mm3"); // Берём блок для показа mm
+let timerShow_ss3 = document.getElementById("ss3"); // Берём блок для показа ss
+
+
+
+var timeMinut = 4 * 60 * 60;
+timer = setInterval(function () {
+    seconds = timeMinut % 60 // Получаем секунды
+    minutes = timeMinut / 60 % 60 // Получаем минуты
+    hour = timeMinut / 60 / 60 % 60 // Получаем часы
+    // Условие если время закончилось то...
+    if (timeMinut <= 0) {
+        // Таймер удаляется
+        clearInterval(timer);
+        timerShow_hh.innerHTML = timerShow_hh2.innerHTM = timerShow_hh3.innerHTM = 00;
+        timerShow_mm.innerHTML = timerShow_mm2.innerHTML = timerShow_mm3.innerHTML = 00;
+        timerShow_ss.innerHTML = timerShow_ss2.innerHTML =  timerShow_ss3.innerHTML = 00;
+
+    } else { // Иначе
+        // Создаём строку с выводом времени
+        // let strTimer = ${Math.trunc(hour)}:${Math.trunc(minuts)}:${seconds};
+        // Выводим строку в блок для показа таймера
+        hour = Math.trunc(hour) < 10 ? '0' + Math.trunc(hour) : Math.trunc(hour);
+        minutes = Math.trunc(minutes) < 10 ? '0' + Math.trunc(minutes) : Math.trunc(minutes);
+        seconds = seconds < 10 ? '0' + seconds : seconds;
+        timerShow_hh.innerHTML = timerShow_hh2.innerHTML = timerShow_hh3.innerHTML = hour;
+        timerShow_mm.innerHTML = timerShow_mm2.innerHTML = timerShow_mm3.innerHTML = minutes;
+        timerShow_ss.innerHTML = timerShow_ss2.innerHTML =  timerShow_ss3.innerHTML = seconds;
+    }
+    --timeMinut; // Уменьшаем таймер
+}, 1000)
+
+$(function () {
+    $('.main-slider').slick({
+        dots: true,
+        arrows: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        adaptiveHeight: true,
+        responsive: [
+            {
+                breakpoint: 1200,
+                settings: {
+                    arrows: false
+                }
+            }
+        ]
+    });
+  
+});
+$(document).ready(function () {
+    $("a:not([href='#'], .icon-close)").click(function (e) {
+        e.preventDefault();
+        $("html, body").animate({scrollTop: $('#toscroll').offset().top});
+    });
+});
